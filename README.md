@@ -10,4 +10,4 @@ install_github("mhsteppan/cor2venn")
 
 ## Examples
 
-![Example using genetic correlations](/image1.png)
+![](/image1.png)
