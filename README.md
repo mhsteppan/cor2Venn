@@ -1,5 +1,7 @@
 # cor2venn_test
 
+## Installation
 
-This package provides a function by which Five Factor Model ("Big Five") profiles can be translated into personality disorder risks. 
-The methodology is described in a recent paper by Steppan et al. (2019). 
+```R 
+library(devtools)
+install_github("mhsteppan/cor2venn")
