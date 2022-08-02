@@ -10,4 +10,4 @@ install_github("mhsteppan/cor2venn")
 
 ## Examples
 
-![Screenshot](image1.png)
+[Screenshot](image1.png)
