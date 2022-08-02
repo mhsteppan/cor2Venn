@@ -9,6 +9,12 @@ library(devtools)
 install_github("mhsteppan/cor2Venn")
 ```
 
+## How to cite 
+
+Steppan, M. (2022). cor2Venn: visualizing correlation matrices as Venn diagrams. R package version
+  0.0.0.9 https://github.com/mhsteppan/cor2Venn
+
+
 ## Examples
 
 ### Example on the Big Five
