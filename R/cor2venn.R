@@ -24,71 +24,22 @@
 #' solve <- cor2venn(cormat)
 #' plot(solve$p)
 
+library(ggplot2)
+data(mtcars)
+
+
 cor2venn <- function(cormat, Rsquared = TRUE, Recode = TRUE)
 {
 
 
+  x<-c("a","b","c")
 
-  if(ncol(ffmprofiles)==5){
-
-    if(nrow(ffmprofiles)>0){
-
-      ExtraversionZ<-ffmprofiles[,1]
-      AgreeablenessZ<-ffmprofiles[,2]
-      ConscientiousnessZ<-ffmprofiles[,3]
-      NeuroticismZ<-ffmprofiles[,4]
-      OpennessZ<-ffmprofiles[,5]
-
-      result<-data.frame(matrix(NA,nrow=nrow(ffmprofiles),ncol=11))
-
-      a<-system.file("extdata","adjectives.csv",package="ffm2pd")
-      adjectives<-read.csv(a,sep=";")
-
-      p<-system.file("extdata","pdmeanvectordist.csv",package="ffm2pd")
-      pdmeanvectordist<-read.csv(p,sep=",")
+  plot <- ggplot(data=mtcars, aes(x=wt, y=mpg)) + geom_point()
 
 
-      me<-system.file("extdata","metaanalyse.csv",package="ffm2pd")
-      metaanalyse<-read.csv(me,sep=";")
+  result<-list(plot,x)
 
-      d<-adjectives
-      d<-data.frame(d)
+  names(result)<-c("plot","x")
 
-      m<-pdmeanvectordist
-
-      meta<-metaanalyse
-
-
-      for (i in 1:nrow(ffmprofiles)){
-
-
-
-
-
-        dis <- as.matrix(as.numeric(((d[,2]-AgreeablenessZ[i])^2 + (d[,3]-ExtraversionZ[i])^2 +(d[,4]-ConscientiousnessZ[i])^2 + (d[,5]-NeuroticismZ[i])^2 + (d[,6]-OpennessZ[i])^2)))
-
-        pd<-  as.matrix(as.numeric(((meta[,2]*8-ExtraversionZ[i])^2 + (meta[,3]*8-OpennessZ[i])^2 +(meta[,4]*8-NeuroticismZ[i])^2 + (meta[,5]*8-ConscientiousnessZ[i])^2 + (meta[,6]*8-AgreeablenessZ[i])^2)))
-
-        pdnorm<- (1-pnorm(as.matrix(as.numeric(((pd-m[,3])/m[,4])))))*100
-
-
-
-        result[i,1:11]<-pdnorm
-
-      }
-      names(result)<-m[,2]
-      return(result)
-
-
-
-
-    }
-    else {
-      print("You need to provide at least one FFM profile")
-    }
-  }
-  else {
-    print("Your data needs exactly 5 columns of the order E-A-C-N-O (Extraversion, Agreeabeleness, Conscientiousness, Neuroticism, Openness")
-  }
-
+  return(result)
 }
