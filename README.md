@@ -11,4 +11,17 @@ install_github("mhsteppan/cor2venn")
 
 ## Examples
 
+### Example on genetic correlations across psychiatric disorders
+
+```R 
+cormat<- abdellaoui
+fit <- cor2venn(cormat)
+plot(fit$p)
+
+```
+
+Source: Abdellaoui, A., Smit, D. J., van den Brink, W., Denys, D., & Verweij, K. J. (2021). Genomic relationships across psychiatric disorders including substance use disorders. Drug and alcohol dependence, 220, 108535.
+
+
+
 ![Screenshot](image1.png)
