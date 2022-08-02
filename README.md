@@ -1,4 +1,4 @@
-# cor2venn
+# cor2Venn
 
 This package visualizes a correlation matrix as a Venn diagram. The overlap of circles represents the shared variance (R squared) between variables. Using additional features (e.g. cor2dist) the distance between two variables is proportionate to their correlation (close = positive correlation; distant = negative correlation). 
 
@@ -15,7 +15,7 @@ install_github("mhsteppan/cor2venn")
 
 ```R 
 cormat<- abdellaoui
-fit <- cor2venn(cormat)
+fit <- cor2Venn(cormat)
 plot(fit$p)
 
 ```
