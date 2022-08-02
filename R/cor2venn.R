@@ -2,8 +2,8 @@
 #'
 #' This function transforms correlation matrices into venn diagrams. The shared surface area of circles corresponds to the shared variance (R squared) or to another metric (e.g. Pearson / spearman correlation). The algorithm is an approximation based on a quasi-Newton algorithm.
 #' @param cormat A (square) correlation matrix (or other n times n numeric matrix)
-#' @param Rsquared Shared surface areas correspond to R^2 (defaults to TRUE)
-#' @param DistProp Distances between data points are proportional to correlations (positive correlation = close, negative correlation = distant; defaults to TRUE)
+#' @param squared Shared surface areas between circles correspond to the squared correlation matrix (defaults to TRUE)
+#' @param cor2dist Distances between data points are proportional to correlations (positive correlation = close, negative correlation = distant; defaults to TRUE)
 #' @param Coloring Coloring of circles. There are three options: "PC1"
 #' @param Recode Automatically recodes the correlation matrix so that the highest correlation of each variable is always positive (defaults to TRUE)
 #' @keywords Correlation plot, psychometrics

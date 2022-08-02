@@ -1,17 +1,31 @@
 # cor2Venn
 
-This package visualizes a correlation matrix as a Venn diagram. The overlap of circles represents the shared variance (R squared) between variables. Using additional features (e.g. cor2dist) the distance between two variables is proportionate to their correlation (close = positive correlation; distant = negative correlation). 
+This package visualizes a correlation matrix as a Venn diagram. The overlap of circles represents the shared variance (R squared) between variables. Using additional features (e.g. cor2dist) the distance between variables is proportionate to their correlation (close = positive correlation; distant = negative correlation). The problem is optimized using 
 
 ## Installation
 
 ```R 
 library(devtools)
-install_github("mhsteppan/cor2venn")
+install_github("mhsteppan/cor2Venn")
 ```
 
 ## Examples
 
+### Example on the Big Five
+
+Openpsychometrics.org published a dataset on N=19,719 individuals responding to a Big Five questionnaire. The raw data is used here. First the correlation matrix is calculated, then the visualization is fitted to the correlation matrix. Due to the fact that some items are inversely coded, the parameter Recode = TRUE is used, so that the highest correlation is always positive.
+
+```R 
+cormat<- abdellaoui
+fit <- cor2Venn(cormat)
+plot(fit$p)
+
+```
+
+
 ### Example on genetic correlations across psychiatric disorders
+
+Abdellaoui et al. published genetic correlations across psychiatric disorders including substance use disorders. Genetic correlations represent the proportion of variance that two traits share due to genetic causes. Therefore, for visualization purposes we use squared = FALSE. 
 
 ```R 
 cormat<- abdellaoui
