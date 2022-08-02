@@ -7,6 +7,7 @@ This package visualizes a correlation matrix as a Venn diagram. The overlap of c
 ```R 
 library(devtools)
 install_github("mhsteppan/cor2venn")
+```
 
 ## Examples
 
