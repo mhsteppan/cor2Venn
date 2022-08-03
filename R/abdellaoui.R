@@ -14,9 +14,8 @@
 #' @references Abdellaoui, A., Smit, D. J., van den Brink, W., Denys, D., & Verweij, K. J. (2021). Genomic relationships across psychiatric disorders including substance use disorders. Drug and alcohol dependence, 220, 108535.
 #' (\href{https://pubmed.ncbi.nlm.nih.gov/33524898/}{PubMed})
 #'
-#' @source \href{https://pubmed.ncbi.nlm.nih.gov/33524898/}{QTL Archive}
+#' @source \href{https://pubmed.ncbi.nlm.nih.gov/33524898/}{}
 #'
-#' @export abdellaoui.RData
 #'
 #' @examples
 #' data(abdellaouirg)

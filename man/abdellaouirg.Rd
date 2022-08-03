@@ -8,7 +8,7 @@
 An object of class \code{"cross"}; see \code{\link[qtl]{read.cross}}.
 }
 \source{
-\href{https://pubmed.ncbi.nlm.nih.gov/33524898/}{QTL Archive}
+\href{https://pubmed.ncbi.nlm.nih.gov/33524898/}{}
 }
 \usage{
 data(abdellaouirg)
