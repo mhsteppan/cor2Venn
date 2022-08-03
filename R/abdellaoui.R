@@ -16,8 +16,10 @@
 #'
 #' @source \href{https://pubmed.ncbi.nlm.nih.gov/33524898/}{QTL Archive}
 #'
+#' @export abdellaoui.RData
+#'
 #' @examples
 #' data(abdellaouirg)
 #' abdellaouirg[,2]
 
-"abdellaoui"
+"abdellaouirg"
