@@ -1,4 +1,4 @@
-#' Correlation matrix to Venn diagram
+#' @title Correlation matrix to Venn diagram
 #'
 #' This function transforms correlation matrices into venn diagrams. The shared surface area of circles corresponds to the shared variance (R squared) or to another metric (e.g. Pearson / spearman correlation). The algorithm is an approximation based on a quasi-Newton algorithm.
 #' @param cormat A (square) correlation matrix (or other n times n numeric matrix)
@@ -15,7 +15,7 @@
 #' Coloring = c("PC1", "Mclust", "manual"))
 #'
 #' @references
-#' Martin Steppan (2022). corr2venn: Correlation to Venn diagramm. R package version 0.7.6. https://CRAN.R-project.org/package=dplyr
+#' Martin Steppan (2022). corr2venn: Correlation to Venn diagramm. R package version 0.1.0.
 #' @import ggplot2
 #'
 #' @examples
