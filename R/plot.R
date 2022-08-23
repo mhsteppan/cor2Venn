@@ -1,7 +1,7 @@
 library(ggrepel)
 library(mclust)
 
-cor2Vennplot <- function(cor2Vennobject, fillmode="Eigen", annotate=TRUE, manualcolors = NA, manualfill = NA, manualnodelabels = NA,manualalphafill=0.5,labelalpha=NA, avoidoverlap = TRUE)
+cor2Vennplot <- function(cor2Vennobject, fillmode="Eigen", annotate=TRUE, manualcolors = NA, manualfill = NA, manualnodelabels = NA,manualalphafill=0.5,labelalpha=NA,labelfill=NA, avoidoverlap = TRUE)
 {
 
 
@@ -45,8 +45,8 @@ cor2Vennplot <- function(cor2Vennobject, fillmode="Eigen", annotate=TRUE, manual
 
 
 
-  dd<-data.frame(x,y,lbls,s,manualcolors,manualfill,manualalphafill)
-  colnames(dd)<-c("x","y","lbl","fill","manualalphafill")
+  dd<-data.frame(x,y,lbls,s,manualcolors,manualfill,manualalphafill,labelfill)
+  colnames(dd)<-c("x","y","lbl","fill","manualalphafill","labelfill")
 
 
 
@@ -71,9 +71,15 @@ cor2Vennplot <- function(cor2Vennobject, fillmode="Eigen", annotate=TRUE, manual
   #p<-p+geom_circle(aes(x0=o$par[1:length(startx)],y0=o$par[(length(startx)+1):(length(startx)*2)],r=s),alpha=0.2,fill="gray",col="transparent")
 
 
-  if (avoidoverlap==FALSE){p<-p+geom_label(aes(x=x,y=y,label=lbl, alpha=as.numeric(labelalpha)))}
-  if (avoidoverlap==TRUE){p<-p+geom_label_repel(aes(x=x,y=y,label=lbl,alpha=as.numeric(labelalpha)))}
+  if (avoidoverlap==FALSE){p<-p+geom_label(aes(x=x,y=y,label=lbl, alpha=as.numeric(labelalpha),fill=labelfill))}
+  if (avoidoverlap==TRUE){p<-p+geom_label_repel(aes(x=x,y=y,label=lbl,alpha=as.numeric(labelalpha),fill=labelfill))}
 
+
+
+  if (length(manualfill)>1){
+    fillmode="manual"
+    p<-p+labs(fill="")
+  }
 
 
 
@@ -120,7 +126,7 @@ if (annotate==TRUE){
   }
   p<-p+ggtitle("Correlation to Venn Plot")
 
-
+p<-p+guides(color="none")
 
 
 
