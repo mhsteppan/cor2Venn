@@ -40,7 +40,7 @@ plot(fit$p)
 
 ```
 
-![Screenshot](ids2cor2venn.png)
+![Screenshot](ids2cor2venn2.png)
 
 
 ### Example on genetic correlations across psychiatric disorders

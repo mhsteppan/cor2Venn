@@ -89,6 +89,7 @@ cor2Vennplot <- function(cor2Vennobject, fillmode="Eigen", annotate=TRUE, manual
 
   p<-p+theme_void()
 
+  p<-p+coord_equal()
 
 
 
