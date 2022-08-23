@@ -13,16 +13,34 @@ install_github("mhsteppan/cor2Venn")
 
 ## Examples
 
+### Example on the g factor of intelligence
+
+```R 
+cormat<-ids2cormat
+fit<-cor2Venn(ids2cormat)
+
+
+mode<-c("Verbal Reasoning","Verbal Reasoning","Long-term memory","Long-term memory","Visual short-term memory","Visual short-term memory","Auditory short-term memory","Auditory short-term memory","Processing speed","Processing speed","Visual processing","Visual processing","Abstract reasoning","Abstract reasoning")
+
+p<-cor2Vennplot(fit,manualfill=mode,manualalphafill = 0.2,labelfill=mode)
+
+ggsave(p.file="ids2cor2venn.png")
+
+```
+
+
 ### Example on the Big Five
 
 Openpsychometrics.org published a dataset on N=19,719 individuals responding to a Big Five questionnaire. The raw data is used here. First the correlation matrix is calculated, then the visualization is fitted to the correlation matrix. Due to the fact that some items are inversely coded, the parameter Recode = TRUE is used, so that the highest correlation is always positive.
 
 ```R 
-cormat<- abdellaoui
-fit <- cor2Venn(cormat)
+cormat<- cor(big5,use="pairwise.complete.obs")
+fit <- cor2VennSolve(cormat)
 plot(fit$p)
 
 ```
+
+![Screenshot](ids2cor2venn.png)
 
 
 ### Example on genetic correlations across psychiatric disorders
