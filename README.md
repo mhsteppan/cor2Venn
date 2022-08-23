@@ -15,6 +15,8 @@ install_github("mhsteppan/cor2Venn")
 
 ### Example on the g factor of intelligence
 
+This is an example on 14 subtests of the intelligence and development test (IDS-2). The visualization shows a 'positive manifold', i.e. that all subtests share variance with each other. Some subtests (e.g. reasoning) are more central than others (e.g. memory).  
+
 ```R 
 cormat<-ids2cormat
 fit<-cor2Venn(ids2cormat)
@@ -29,6 +31,9 @@ ggsave(p.file="ids2cor2venn.png")
 ```
 
 
+![Screenshot](ids2cor2venn2.png)
+
+
 ### Example on the Big Five
 
 Openpsychometrics.org published a dataset on N=19,719 individuals responding to a Big Five questionnaire. The raw data is used here. First the correlation matrix is calculated, then the visualization is fitted to the correlation matrix. Due to the fact that some items are inversely coded, the parameter Recode = TRUE is used, so that the highest correlation is always positive.
@@ -40,7 +45,6 @@ plot(fit$p)
 
 ```
 
-![Screenshot](ids2cor2venn2.png)
 
 
 ### Example on genetic correlations across psychiatric disorders
