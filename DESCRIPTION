@@ -1,4 +1,4 @@
-Package: cor2venn
+Package: cor2Venn
 Title: Transforms a correlation matrix into a Venn diagram
 Version: 0.0.0.9000
 Authors@R: 

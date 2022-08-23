@@ -21,4 +21,4 @@
 #' data(abdellaouirg)
 #' abdellaouirg[,2]
 
-"abdellaouirg"
+"abdellaouietal"
