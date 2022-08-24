@@ -13,7 +13,7 @@ install_github("mhsteppan/cor2Venn")
 
 ## Examples
 
-### Example on the g factor of intelligence
+### Example on the g' factor of intelligence
 
 This is an example on 14 subtests of the intelligence and development test (IDS-2). The visualization shows a 'positive manifold', i.e. that all subtests share variance with each other. Some subtests (e.g. reasoning) are more central than others (e.g. memory).  
 
@@ -40,7 +40,7 @@ Openpsychometrics.org published a dataset on N=19,719 individuals responding to 
 
 ```R 
 cormat<- cor(big5,use="pairwise.complete.obs")
-fitbig5 <- cor2VennSolve(cormat)
+fitbig5 <- cor2Venn(cormat,recode=TRUE)
 
 p<-cor2Vennplot(fitbig5,manualalphafill=0.2,fillmode="mclust",density = T)
 p<-p+scale_fill_discrete(labels=c("Extraversion","Neuroticism","Agreeableness","Conscientiousness","Openness"))
@@ -49,7 +49,7 @@ p<-p+scale_fill_discrete(labels=c("Extraversion","Neuroticism","Agreeableness","
 ![Screenshot](big5cor2venn.png)
 
 
-### Example on genetic correlations across psychiatric disorders
+### Example on genetic correlations across psychiatric disorders - the p' factor 
 
 Abdellaoui et al. published genetic correlations across psychiatric disorders including substance use disorders. Genetic correlations represent the proportion of variance that two traits share due to genetic causes. Therefore, for visualization purposes we use squared = FALSE. 
 

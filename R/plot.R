@@ -85,8 +85,9 @@ cor2Vennplot <- function(cor2Vennobject, fillmode="Eigen", PCs=0, annotate=TRUE,
   p<-p+geom_circle(aes(x0=as.numeric(x),y0=as.numeric(y),r=as.numeric(s),fill=manualfill),alpha=manualalphafill,col="transparent")
 
   if (density ==TRUE){
-    p<-p+geom_density2d(data=dens,aes(x=as.numeric(dens[,1]),y=as.numeric(dens[,2])),col="gray")
-
+    p<-p+geom_density2d(data=dens,aes(x=as.numeric(dens[,1]),y=as.numeric(dens[,2]),col="Overlap density"))
+  p<-p+scale_color_manual(values="gray")
+  p<-p+labs(col="")
   }
 
   #p<-p+geom_density2d_filled(data=dens,aes(x=as.numeric(dens[,1]),y=as.numeric(dens[,2])))
@@ -135,13 +136,14 @@ cor2Vennplot <- function(cor2Vennobject, fillmode="Eigen", PCs=0, annotate=TRUE,
 
 
 
+
   Rsquared<-cor2Vennobject$optimization[1]
   cor2dist<-cor2Vennobject$optimization[2]
 
   modelfit<-ov(cor2Vennobject,Rsquared=Rsquared)
 
 
-annotation<-"Visualization based on R package {cor2Venn}."
+annotation<-"Visualization based on R package {cor2Venn}. https://github.com/mhsteppan/cor2Venn"
 
 if (Rsquared=="TRUE"){
   annotation<-paste(annotation,"\n","Shared variance (R^2) is equivalent to shared surface. Model fit: ",round(as.numeric(modelfit[1]),digits=4),sep="")
