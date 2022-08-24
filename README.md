@@ -30,8 +30,8 @@ ggsave(p.file="ids2cor2venn.png")
 
 ```
 
+![Screenshot](ids2cor2venn2.png)
 
-![Screenshot](big5cor2venn2.png)
 
 
 ### Example on the Big Five
@@ -46,8 +46,8 @@ p<-cor2Vennplot(fitbig5,manualalphafill=0.2,fillmode="mclust",density = T)
 p<-p+scale_fill_discrete(labels=c("Extraversion","Neuroticism","Agreeableness","Conscientiousness","Openness"))
 
 ```
+![Screenshot](big5cor2venn.png)
 
-![Screenshot](ids2cor2venn2.png)
 
 ### Example on genetic correlations across psychiatric disorders
 
