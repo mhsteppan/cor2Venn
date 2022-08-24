@@ -152,13 +152,18 @@ if (Rsquared=="FALSE"){
   annotation<-paste(annotation,"\n","Correlation is equivalent to shared surface.","Accuracy (Pearson correlation): ",round(as.numeric(modelfit[1]),digits=4),sep="")
 }
 
-if (cor2dist=="1"){
+if (cor2dist==TRUE){
+  if (Rsquared==FALSE){
   annotation<-paste(annotation,"\n","Euclidean distance between circles is equivalent to correlation. Accuracy (Pearson correlation): ",round(as.numeric(modelfit[2]),digits=4),sep="")
-}
+  }
 
-if (cor2dist=="2"){
-  annotation<-paste(annotation,"\n","Euclidean distance between circles is equivalent to signed R squared. Accuracy (Pearson correlation): ",round(as.numeric(modelfit[2]),digits=4),sep="")
-}
+  if (Rsquared==TRUE){
+    annotation<-paste(annotation,"\n","Euclidean distance between circles is equivalent to signed R squared. Accuracy (Pearson correlation): ",round(as.numeric(modelfit[2]),digits=4),sep="")
+
+  }
+
+  }
+
 
 
 if (annotate==TRUE){
