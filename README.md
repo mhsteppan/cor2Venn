@@ -60,7 +60,7 @@ plot(fit$p)
 
 ```
 
-![Screenshot](big5cor2venn.png)
+![Image2](big5cor2venn.png)
 
 Source: Abdellaoui, A., Smit, D. J., van den Brink, W., Denys, D., & Verweij, K. J. (2021). Genomic relationships across psychiatric disorders including substance use disorders. Drug and alcohol dependence, 220, 108535.
 
