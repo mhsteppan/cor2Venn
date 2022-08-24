@@ -17,6 +17,10 @@ cor2Vennplot <- function(cor2Vennobject, fillmode="Eigen", PCs=0, annotate=TRUE,
 
 
 
+  if (length(manualfill)>1){
+    fillmode="manual"
+  }
+
   dens<-data.frame(matrix(NA,nrow=length(x)*1000,ncol=2))
 
   for (i in 1:length(x)){
@@ -118,16 +122,11 @@ cor2Vennplot <- function(cor2Vennobject, fillmode="Eigen", PCs=0, annotate=TRUE,
 
 
 
-  if (length(manualfill)>1){
-    fillmode="manual"
-    p<-p+labs(fill="")
-  }
 
 
 
 
-    if (fillmode=="Eigen"){p<-p+labs(fill="First Eigenvector")}
-    if (fillmode=="mclust"){p<-p+labs(fill="Cluster")}
+
 
   p<-p+theme_void()
 
@@ -174,9 +173,11 @@ if (annotate==TRUE){
   }
   p<-p+ggtitle("Correlation to Venn Plot")
 
-p<-p+guides(color="none")
 
+  if (fillmode=="Eigen"){p<-p+labs(fill="First Eigenvector")}
+  if (fillmode=="mclust"){p<-p+labs(fill="Cluster")}
 
+  if (fillmode=="manual"){p<-p+labs(fill="Manual fill")}
 
 
 
