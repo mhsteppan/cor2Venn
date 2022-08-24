@@ -31,7 +31,7 @@ ggsave(p.file="ids2cor2venn.png")
 ```
 
 
-![Screenshot](ids2cor2venn2.png)
+![Screenshot](big5cor2venn2.png)
 
 
 ### Example on the Big Five
