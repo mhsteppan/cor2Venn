@@ -32,7 +32,7 @@ library(mclust)
 library(optimr)
 library(reshape2)
 
-cor2Venn <- function(cormat, Rsquared = TRUE, Recode = FALSE,maxit=100,cor2dist="0",startingvalues=list())
+cor2Venn <- function(cormat, Rsquared = TRUE, Recode = FALSE,maxit=100,cor2dist=FALSE,startingvalues=list())
 {
 
 
@@ -99,7 +99,7 @@ cor2Venn <- function(cormat, Rsquared = TRUE, Recode = FALSE,maxit=100,cor2dist=
 
 
   end_time <- Sys.time()
-  totaltime <- end_time - start_time
+  totaltime <- as.numeric(end_time - start_time)
 
 
 

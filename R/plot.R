@@ -1,7 +1,8 @@
 library(ggrepel)
 library(mclust)
+library(MASS)
 
-cor2Vennplot <- function(cor2Vennobject, fillmode="Eigen", annotate=TRUE, manualcolors = NA, manualfill = NA, manualnodelabels = NA,manualalphafill=0.5,labelalpha=NA,labelfill=NA, avoidoverlap = TRUE)
+cor2Vennplot <- function(cor2Vennobject, fillmode="Eigen", PCs=0, annotate=TRUE, showcenter=FALSE,manualcolors = NA, manualfill = NA, manualnodelabels = NA,manualalphafill=0.5,labelalpha=NA,labelfill=NA, avoidoverlap = TRUE,density=FALSE)
 {
 
 
@@ -11,8 +12,28 @@ cor2Vennplot <- function(cor2Vennobject, fillmode="Eigen", annotate=TRUE, manual
   s<-cor2Vennobject$radius
   c<-cor2Vennobject$cormat
 
+  xx<-logical(0)
+  yy<-logical(0)
+
+
+
+  dens<-data.frame(matrix(NA,nrow=length(x)*1000,ncol=2))
+
+  for (i in 1:length(x)){
+    xx<-c(xx,rnorm(1000,x[i],1))
+    yy<-c(yy,rnorm(1000,y[i],1))
+  }
+
+  dens[,1]<-xx
+  dens[,2]<-yy
+
+
+
+
 
   e<-eigen(c)
+
+
   if (is.na(manualfill[1])==T){
 
     if (fillmode == "Eigen"){
@@ -59,8 +80,29 @@ cor2Vennplot <- function(cor2Vennobject, fillmode="Eigen", annotate=TRUE, manual
 
   p<-p+geom_circle(aes(x0=as.numeric(x),y0=as.numeric(y),r=as.numeric(s),fill=manualfill),alpha=manualalphafill,col="transparent")
 
+  if (density ==TRUE){
+    p<-p+geom_density2d(data=dens,aes(x=as.numeric(dens[,1]),y=as.numeric(dens[,2])),col="gray")
+
+  }
+
+  #p<-p+geom_density2d_filled(data=dens,aes(x=as.numeric(dens[,1]),y=as.numeric(dens[,2])))
+  #p<-p+geom_bin2d(data=dens,aes(x=as.numeric(dens[,1]),y=as.numeric(dens[,2])),bins=70,alpha=0.1)
 
 
+
+  xmi<-min(dens[,1])
+  xma<-max(dens[,1])
+  ymi<-min(dens[,2])
+  yma<-max(dens[,2])
+
+  dens2<-data.frame(matrix(NA,nrow=100,ncol=100))
+
+
+  if (showcenter==TRUE){
+
+    p<-p+geom_point(aes(x=mean(x),y=mean(y),shape="Center"))
+    p<- p +labs(shape="")
+  }
 
 
 
@@ -128,6 +170,8 @@ if (annotate==TRUE){
   p<-p+ggtitle("Correlation to Venn Plot")
 
 p<-p+guides(color="none")
+
+
 
 
 

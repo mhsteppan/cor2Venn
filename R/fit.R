@@ -45,8 +45,14 @@ fit<-function(x2,cormat,Rsquared=TRUE,cor2dist="0"){
 
 
 
-  if (Rsquared==TRUE){target<-wr2}
-  if (Rsquared==FALSE){target<-wr}
+  if (Rsquared==TRUE){
+    target<-wr2
+    ccc<-cor(cbind(olong[,3],wr2long[,3]),use="pairwise.complete.obs")[1,2]
+    }
+  if (Rsquared==FALSE){
+    target<-wr
+    ccc<-cor(cbind(olong[,3],wrlong[,3]),use="pairwise.complete.obs")[1,2]
+    }
 
 
 
@@ -54,15 +60,18 @@ fit<-function(x2,cormat,Rsquared=TRUE,cor2dist="0"){
 
   #cor(cbind(olong[,3],clong[,3]^2))[1,2]
 
-  if (cor2dist=="0"){
+  if (cor2dist==FALSE){
     cc<-1
   }
 
-  if (cor2dist=="1"){
-    cc<-cor(cbind(dilong[,3],wr2long[,3]*-1),use="pairwise.complete.obs")[1,2]
-  }
+  if (cor2dist==TRUE){
 
-  if (cor2dist=="2"){
+    if (Rsquared==TRUE){
+    cc<-cor(cbind(dilong[,3],wr2long[,3]*-1),use="pairwise.complete.obs")[1,2]
+}
+    }
+
+  if (Rsquared==FALSE){
     cc<-cor(cbind(dilong[,3],wrlong[,3]*-1),use="pairwise.complete.obs")[1,2]
   }
 
@@ -84,20 +93,23 @@ fit<-function(x2,cormat,Rsquared=TRUE,cor2dist="0"){
 
 
   if (Rsquared==T){
-    print(paste("Accuracy: ", rr1,"%"," r=",cc,sep=""))
+    print(paste("Accuracy: ", rr1,"%"," r=",cc," ",ccc, sep=""))
   }
 
   if (Rsquared==F){
-    print(paste("Accuracy: ", rr2," r=",cc,sep=""))
+    print(paste("Accuracy: ", rr2," r=",cc," ",ccc,sep=""))
   }
 
-
+  print(paste("overlap:",sum(overlap,na.rm=T),sep=""))
+  print(paste("target:",sum(target,na.rm=T),sep=""))
 
   #sum(((overlap-wr2)^2)/length(x),na.rm=T)
   #sum(((overlap-wr2)^2)/length(x)*1/cc*dev*dev2,na.rm=T)
 
 
-  1/cc*sum(((overlap-target)^2)/length(x),na.rm=T)
+  old<-sum((overlap-target)^2,na.rm=T)/length(x)
+
+  1/cc*1/ccc*old
 
 
 

@@ -40,12 +40,14 @@ Openpsychometrics.org published a dataset on N=19,719 individuals responding to 
 
 ```R 
 cormat<- cor(big5,use="pairwise.complete.obs")
-fit <- cor2VennSolve(cormat)
-plot(fit$p)
+fitbig5 <- cor2VennSolve(cormat)
+
+p<-cor2Vennplot(fitbig5,manualalphafill=0.2,fillmode="mclust",density = T)
+p<-p+scale_fill_discrete(labels=c("Extraversion","Neuroticism","Agreeableness","Conscientiousness","Openness"))
 
 ```
 
-
+![Screenshot](ids2cor2venn2.png)
 
 ### Example on genetic correlations across psychiatric disorders
 
@@ -57,6 +59,8 @@ fit <- cor2Venn(cormat)
 plot(fit$p)
 
 ```
+
+![Screenshot](big5cor2venn.png)
 
 Source: Abdellaoui, A., Smit, D. J., van den Brink, W., Denys, D., & Verweij, K. J. (2021). Genomic relationships across psychiatric disorders including substance use disorders. Drug and alcohol dependence, 220, 108535.
 
