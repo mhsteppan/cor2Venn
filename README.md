@@ -55,8 +55,10 @@ Abdellaoui et al. published genetic correlations across psychiatric disorders in
 
 ```R 
 cormat<- abdellaoui
-fit <- cor2Venn(cormat)
-plot(fit$p)
+fitrg <- cor2Venn(cormat, Rsquared=F,cor2dist=T)
+p<-cor2Vennplot(fitrg,manualalphafill=0.2,density=T)
+p<-p+scale_fill_gradient(high="red",low="yellow")
+ggsave(p,file="abdellaouicor2venn.png")
 
 ```
 
@@ -65,8 +67,6 @@ plot(fit$p)
 Source: Abdellaoui, A., Smit, D. J., van den Brink, W., Denys, D., & Verweij, K. J. (2021). Genomic relationships across psychiatric disorders including substance use disorders. Drug and alcohol dependence, 220, 108535.
 
 
-
-![Screenshot](image1.png)
 
 
 ## How to cite 
