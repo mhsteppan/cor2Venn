@@ -29,13 +29,7 @@
 #' solve <- cor2venn(cormat)
 #' plot(solve$p)
 
-library(ggplot2)
 
-library(pracma)
-library(ggforce)
-library(mclust)
-library(optimr)
-library(reshape2)
 
 #' @export
 
