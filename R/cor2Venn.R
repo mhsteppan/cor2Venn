@@ -16,7 +16,6 @@
 #'
 #' @references
 #' Martin Steppan (2022). corr2venn: Correlation to Venn diagramm. R package version 0.1.0.
-#' @import ggplot2, pracma, ggforce, mclust, optimr, reshape2, MASS
 #'
 #' @examples
 #' cormat <- cor(mtcars[,2:13])
