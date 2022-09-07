@@ -14,25 +14,6 @@ library(cor2Venn)
 
 ## Examples
 
-### Example on the g' factor of intelligence
-
-This is an example on 14 subtests of the intelligence and development test (IDS-2). The visualization shows a 'positive manifold', i.e. that all subtests share variance with each other. Some subtests (e.g. reasoning) are more central than others (e.g. memory).  
-
-```R 
-cormat<-ids2cormat
-fit<-cor2Venn(ids2cormat)
-
-
-mode<-c("Verbal Reasoning","Verbal Reasoning","Long-term memory","Long-term memory","Visual short-term memory","Visual short-term memory","Auditory short-term memory","Auditory short-term memory","Processing speed","Processing speed","Visual processing","Visual processing","Abstract reasoning","Abstract reasoning")
-
-p<-cor2Vennplot(fit,manualfill=mode,manualalphafill = 0.2,labelfill=mode)
-
-ggsave(p,file="ids2cor2venn.png")
-
-```
-
-![Screenshot](ids2cor2venn.png)
-
 
 
 ### Example on the Big Five
@@ -67,6 +48,26 @@ ggsave(p,file="abdellaouicor2venn.png")
 
 Source: Abdellaoui, A., Smit, D. J., van den Brink, W., Denys, D., & Verweij, K. J. (2021). Genomic relationships across psychiatric disorders including substance use disorders. Drug and alcohol dependence, 220, 108535.
 
+
+
+### Example on the g' factor of intelligence
+
+This is an example on 14 subtests of the intelligence and development test (IDS-2). The visualization shows a 'positive manifold', i.e. that all subtests share variance with each other. Some subtests (e.g. reasoning) are more central than others (e.g. memory).  
+
+```R 
+cormat<-ids2cormat
+fit<-cor2Venn(ids2cormat)
+
+
+mode<-c("Verbal Reasoning","Verbal Reasoning","Long-term memory","Long-term memory","Visual short-term memory","Visual short-term memory","Auditory short-term memory","Auditory short-term memory","Processing speed","Processing speed","Visual processing","Visual processing","Abstract reasoning","Abstract reasoning")
+
+p<-cor2Vennplot(fit,manualfill=mode,manualalphafill = 0.2,labelfill=mode)
+
+ggsave(p,file="ids2cor2venn.png")
+
+```
+
+![Screenshot](ids2cor2venn.png)
 
 
 
