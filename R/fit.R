@@ -93,15 +93,15 @@ fit<-function(x2,cormat,Rsquared=TRUE,cor2dist="0"){
 
 
   if (Rsquared==T){
-    print(paste("Accuracy: ", rr1,"%"," r=",cc," ",ccc, sep=""))
+    #print(paste("Accuracy: ", rr1,"%"," r=",cc," ",ccc, sep=""))
   }
 
   if (Rsquared==F){
-    print(paste("Accuracy: ", rr2," r=",cc," ",ccc,sep=""))
+    #print(paste("Accuracy: ", rr2," r=",cc," ",ccc,sep=""))
   }
 
-  print(paste("overlap:",sum(overlap,na.rm=T),sep=""))
-  print(paste("target:",sum(target,na.rm=T),sep=""))
+  #print(paste("overlap:",sum(overlap,na.rm=T),sep=""))
+  #print(paste("target:",sum(target,na.rm=T),sep=""))
 
   #sum(((overlap-wr2)^2)/length(x),na.rm=T)
   #sum(((overlap-wr2)^2)/length(x)*1/cc*dev*dev2,na.rm=T)

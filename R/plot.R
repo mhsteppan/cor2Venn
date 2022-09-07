@@ -7,9 +7,9 @@ cor2Vennplot <- function(cor2Vennobject, fillmode="Eigen", PCs=0, annotate=TRUE,
 
 
 
-  x<-cor2Vennobject$x
-  y<-cor2Vennobject$y
-  s<-cor2Vennobject$radius
+  x<-cor2Vennobject$xna
+  y<-cor2Vennobject$yna
+  s<-1
   c<-cor2Vennobject$cormat
 
   xx<-logical(0)
@@ -21,12 +21,14 @@ cor2Vennplot <- function(cor2Vennobject, fillmode="Eigen", PCs=0, annotate=TRUE,
     fillmode="manual"
   }
 
-  dens<-data.frame(matrix(NA,nrow=length(x)*1000,ncol=2))
+  dens<-data.frame(matrix(NA,nrow=length(na.omit(x))*1000,ncol=2))
 
   for (i in 1:length(x)){
+    if (is.na(x[i])==F){
     xx<-c(xx,rnorm(1000,x[i],1))
     yy<-c(yy,rnorm(1000,y[i],1))
-  }
+    }
+    }
 
   dens[,1]<-xx
   dens[,2]<-yy

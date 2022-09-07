@@ -1,11 +1,14 @@
 ov<-function(cor2Vennobj,Rsquared=TRUE){
 
 
+  exclude<-cor2Vennobj$exclude
 
-  x<-cor2Vennobj$x
-  y<-cor2Vennobj$y
+  x<-cor2Vennobj$xna
+  y<-cor2Vennobj$yna
 
-  cormat<-as.matrix(cor2Vennobj$cormat)
+
+
+    cormat<-as.matrix(cor2Vennobj$cormat)
 
 
   overlap<-matrix(NA,nrow=nrow(cormat),ncol=ncol(cormat))
@@ -19,8 +22,9 @@ ov<-function(cor2Vennobj,Rsquared=TRUE){
   for (i in 1:length(x)){
     for (j in 1:length(y)){
 
+      if ((is.na(x[i])==F && is.na(x[j])==F)==TRUE){
       overlap[i,j]<-inters(x[i],y[i],1,x[j],y[j],1)
-      di[i,j]<-dis(x[i],y[i],x[j],y[j])
+      di[i,j]<-dis(x[i],y[i],x[j],y[j])}
     }
   }
 

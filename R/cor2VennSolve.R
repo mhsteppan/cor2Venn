@@ -32,7 +32,9 @@ library(mclust)
 library(optimr)
 library(reshape2)
 
-cor2Venn <- function(cormat, Rsquared = TRUE, Recode = FALSE,maxit=100,cor2dist=FALSE,startingvalues=list())
+#' @export
+
+cor2Venn <- function(cormat, Rsquared = TRUE, Recode = FALSE,maxit=100,threshold=-1,cor2dist=FALSE,startingvalues=list())
 {
 
 
@@ -56,6 +58,7 @@ cor2Venn <- function(cormat, Rsquared = TRUE, Recode = FALSE,maxit=100,cor2dist=
 
 
 
+ n <-ncol(c)
 
 
 
@@ -85,9 +88,25 @@ cor2Venn <- function(cormat, Rsquared = TRUE, Recode = FALSE,maxit=100,cor2dist=
 
   o <- NULL
 
-  o<-optimr(par=c(startx,starty),method="L-BFGS-B",lower=l,upper=u,fn=fit,cormat=c,Rsquared=Rsquared,cor2dist=cor2dist,control = list(fnscale=1,maxit = maxit, trace = 60,
-                                                                                                 REPORT = 50))
 
+  exclude<-logical(0)
+
+  belows<-NA
+
+  while (length(belows)>0){
+
+  if (length(exclude)>0){
+  startx<-startx[-exclude]
+  starty<-starty[-exclude]
+  o<-optimr(par=c(startx,starty),method="L-BFGS-B",lower=l[-exclude],upper=u[-exclude],fn=fit,cormat=c[-exclude,-exclude],Rsquared=Rsquared,cor2dist=cor2dist,control = list(fnscale=1,maxit = maxit, trace = 60,
+                                                                       REPORT = 50))
+  }
+
+  if (length(exclude)==0){
+
+    o<-optimr(par=c(startx,starty),method="L-BFGS-B",lower=l,upper=u,fn=fit,cormat=c,Rsquared=Rsquared,cor2dist=cor2dist,control = list(fnscale=1,maxit = maxit, trace = 60,
+                                                                                                                                                                               REPORT = 50))
+  }
 
 
 
@@ -97,6 +116,13 @@ cor2Venn <- function(cormat, Rsquared = TRUE, Recode = FALSE,maxit=100,cor2dist=
   s<-rep(1,length(startx))
 
 
+  se<-seq(1,n,1)
+  fill<-setdiff(se,exclude)
+  xna<- rep(NA,n)
+  yna<- rep(NA,n)
+
+  xna[fill]<-x
+  yna[fill]<-y
 
   end_time <- Sys.time()
   totaltime <- as.numeric(end_time - start_time)
@@ -111,15 +137,33 @@ cor2Venn <- function(cormat, Rsquared = TRUE, Recode = FALSE,maxit=100,cor2dist=
   optimization<-matrix(c(Rsquared,cor2dist),ncol=2)
   colnames(optimization)<-c("Rsquared","cor2dist")
 
-  result<-list(x,y,s,NA,as.numeric(totaltime),c)
-  names(result)<-c("x","y","radius","modelfit","cputime","cormat")
+  result<-list(x,y,s,NA,as.numeric(totaltime),c,exclude,xna,yna)
+  names(result)<-c("x","y","radius","modelfit","cputime","cormat","exclude","xna","yna")
 
   goodness<-ov(result,Rsquared=Rsquared)
 
-  result<-list(optimization, x,y,s,goodness,as.numeric(totaltime),c)
-  names(result)<-c("optimization","x","y","radius","modelfit","cputime","cormat")
+
+  result<-list(optimization, x,y,s,goodness,as.numeric(totaltime),c,exclude,xna,yna)
+  names(result)<-c("optimization","x","y","radius","modelfit","cputime","cormat","exclude","xna","yna")
 
 
+
+  vf<-varfit(result,Rsquared=Rsquared)
+  print(exclude)
+  print(vf)
+
+  belows<-which(vf[,1]<threshold)
+  mi<-belows
+
+  exclude<-c(exclude,mi)
+
+
+  startx<-result$x
+  starty<-result$y
+
+  }
+  result<-list(optimization, x,y,s,goodness,as.numeric(totaltime),c,exclude,xna,yna,vf)
+  names(result)<-c("optimization","x","y","radius","modelfit","cputime","cormat","exclude","xna","yna","varfit")
 
 
 
