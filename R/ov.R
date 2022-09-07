@@ -1,3 +1,6 @@
+#' @import ggplot2, pracma, ggforce, mclust, optimr, reshape2, MASS
+
+
 ov<-function(cor2Vennobj,Rsquared=TRUE){
 
 
