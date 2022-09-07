@@ -7,6 +7,7 @@ This package visualizes a correlation matrix as a Venn diagram. The overlap of c
 ```R 
 library(devtools)
 install_github("mhsteppan/cor2Venn")
+library(cor2Venn)
 ```
 
 
@@ -26,7 +27,7 @@ mode<-c("Verbal Reasoning","Verbal Reasoning","Long-term memory","Long-term memo
 
 p<-cor2Vennplot(fit,manualfill=mode,manualalphafill = 0.2,labelfill=mode)
 
-ggsave(p.file="ids2cor2venn.png")
+ggsave(p,file="ids2cor2venn.png")
 
 ```
 
@@ -54,7 +55,7 @@ p<-p+scale_fill_discrete(labels=c("Extraversion","Neuroticism","Agreeableness","
 Abdellaoui et al. published genetic correlations across psychiatric disorders including substance use disorders. Genetic correlations represent the proportion of variance that two traits share due to genetic causes. Therefore, for visualization purposes we use squared = FALSE. 
 
 ```R 
-cormat<- abdellaoui
+cormat<- abdellaouietal
 fitrg <- cor2Venn(cormat, Rsquared=F,cor2dist=T)
 p<-cor2Vennplot(fitrg,manualalphafill=0.2,density=T)
 p<-p+scale_fill_gradient(high="red",low="yellow")
