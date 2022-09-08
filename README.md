@@ -41,7 +41,7 @@ ggsave(p,file="ids2cor2venn.png")
 
 ### Example on the Big Five
 
-Openpsychometrics.org published a dataset on N=19,719 individuals responding to a Big Five questionnaire. The raw data is used here. First the correlation matrix is calculated, then the visualization is fitted to the correlation matrix. Due to the fact that some items are inversely coded, the parameter Recode = TRUE is used, so that the highest correlation is always positive.
+Openpsychometrics.org published a dataset on N=19,719 individuals responding to a Big Five questionnaire. The raw data is used here. First the correlation matrix is calculated, then the visualization is fitted to the correlation matrix. Due to the fact that some items are inversely coded, the parameter Recode = TRUE is used, so that the highest correlation is always positive. (Attention: This example runs for several minutes)
 
 ```R 
 cormat<- cor(big5,use="pairwise.complete.obs")
@@ -64,6 +64,7 @@ cormat<- abdellaouietal
 fitrg <- cor2Venn(cormat, Rsquared=F,cor2dist=T)
 p<-cor2Vennplot(fitrg,manualalphafill=0.2,density=T)
 p<-p+scale_fill_gradient(high="red",low="yellow")
+p
 ggsave(p,file="abdellaouicor2venn.png")
 
 ```
