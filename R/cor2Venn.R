@@ -90,6 +90,9 @@ cor2Venn <- function(cormat, Rsquared = TRUE, Recode = FALSE,maxit=100,threshold
   if (length(exclude)>0){
   startx<-startx[-exclude]
   starty<-starty[-exclude]
+
+  print("Optimizing... Abort pressing ESC")
+
   o<-optimr(par=c(startx,starty),method="L-BFGS-B",lower=l[-exclude],upper=u[-exclude],fn=fit,cormat=c[-exclude,-exclude],Rsquared=Rsquared,cor2dist=cor2dist,control = list(fnscale=1,maxit = maxit, trace = 60,
                                                                        REPORT = 50))
   }

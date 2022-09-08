@@ -172,7 +172,7 @@ cor2Vennplot <- function(cor2Vennobject, fillmode="Eigen", PCs=0, annotate=TRUE,
 annotation<-"Visualization based on R package {cor2Venn}. https://github.com/mhsteppan/cor2Venn"
 
 if (Rsquared=="TRUE"){
-  annotation<-paste(annotation,"\n","Shared variance (R^2) is equivalent to shared surface. Model fit: ",round(as.numeric(modelfit[1]),digits=4),sep="")
+  annotation<-paste(annotation,"\n","Shared variance (R^2) is equivalent to shared surface. Accuracy (Pearson correlation): ",round(as.numeric(modelfit[1]),digits=4),sep="")
 }
 
 if (Rsquared=="FALSE"){
