@@ -2,9 +2,7 @@
 % Please edit documentation in R/cor2Vennplot.R
 \name{cor2Vennplot}
 \alias{cor2Vennplot}
-\title{Plot a cor2Venn object using ggplot2
-
-This function transforms correlation matrices into venn diagrams. The shared surface area of circles corresponds to the shared variance (R squared) or to another metric (e.g. Pearson / spearman correlation). The algorithm is an approximation based on a quasi-Newton algorithm.}
+\title{Plot a cor2Venn object using ggplot2}
 \usage{
 cor2venn(cormat, Rsquared = TRUE, cor2dist=c("0","1","2"), Recode = TRUE,
 Coloring = c("PC1", "Mclust", "manual"))
@@ -22,8 +20,6 @@ Coloring = c("PC1", "Mclust", "manual"))
 p A ggplot2 object showing the graphical approximation
 }
 \description{
-Plot a cor2Venn object using ggplot2
-
 This function transforms correlation matrices into venn diagrams. The shared surface area of circles corresponds to the shared variance (R squared) or to another metric (e.g. Pearson / spearman correlation). The algorithm is an approximation based on a quasi-Newton algorithm.
 }
 \examples{

@@ -2,11 +2,9 @@
 % Please edit documentation in R/cor2Venn.R
 \name{cor2Venn}
 \alias{cor2Venn}
-\title{Correlation matrix to Venn diagram
-
-This function transforms correlation matrices into venn diagrams. The shared surface area of circles corresponds to the shared variance (R squared) or to another metric (e.g. Pearson / spearman correlation). The algorithm is an approximation based on a quasi-Newton algorithm.}
+\title{Correlation matrix to Venn diagram}
 \usage{
-cor2venn(cormat, Rsquared = TRUE, cor2dist=c("0","1","2"), Recode = TRUE,
+cor2Venn(cormat, Rsquared = TRUE, cor2dist=c("0","1","2"), Recode = TRUE,
 Coloring = c("PC1", "Mclust", "manual"))
 }
 \arguments{
@@ -28,15 +26,13 @@ xyr A three-column matrix providing x and y coordinates for all variables in the
 t CPU time required to find the optimized solution
 }
 \description{
-Correlation matrix to Venn diagram
-
 This function transforms correlation matrices into venn diagrams. The shared surface area of circles corresponds to the shared variance (R squared) or to another metric (e.g. Pearson / spearman correlation). The algorithm is an approximation based on a quasi-Newton algorithm.
 }
 \examples{
 cormat <- cor(mtcars[,2:13])
 
-solve <- cor2venn(cormat)
-plot(solve$p)
+fit <- cor2venn(cormat)
+cor2Vennplot(fit)
 }
 \references{
 Martin Steppan (2022). corr2venn: Correlation to Venn diagramm. R package version 0.1.0.

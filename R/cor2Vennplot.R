@@ -1,6 +1,6 @@
 #' @title Plot a cor2Venn object using ggplot2
 #'
-#' This function transforms correlation matrices into venn diagrams. The shared surface area of circles corresponds to the shared variance (R squared) or to another metric (e.g. Pearson / spearman correlation). The algorithm is an approximation based on a quasi-Newton algorithm.
+#' @description This function transforms correlation matrices into venn diagrams. The shared surface area of circles corresponds to the shared variance (R squared) or to another metric (e.g. Pearson / spearman correlation). The algorithm is an approximation based on a quasi-Newton algorithm.
 #' @param cor2Vennobj A cor2Venn object
 #' @param manualfill A vector to manually change the fill color of variables
 #' @param manualalphafill A vector to manually change the alpha fill of variables, defaults to 0.5
