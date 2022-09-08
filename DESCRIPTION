@@ -20,4 +20,4 @@ Depends:
     reshape2(>= 1.4.4),
     MASS (>= 7.3-53),
     ggrepel (>= 0.9.1),
-    ggforce (>=0.3.4)
+    ggforce (>= 0.3.4)
