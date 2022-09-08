@@ -1,4 +1,4 @@
-
+#' @export
 
 cor2Vennplot <- function(cor2Vennobject, fillmode="Eigen", PCs=0, annotate=TRUE, showcenter=FALSE,manualcolors = NA, manualfill = NA, manualnodelabels = NA,manualalphafill=0.5,labelalpha=NA,labelfill=NA, avoidoverlap = TRUE,density=FALSE)
 {
