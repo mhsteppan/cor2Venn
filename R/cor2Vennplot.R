@@ -176,7 +176,7 @@ if (Rsquared=="TRUE"){
 }
 
 if (Rsquared=="FALSE"){
-  annotation<-paste(annotation,"\n","Correlation is equivalent to shared surface.","Accuracy (Pearson correlation): ",round(as.numeric(modelfit[1]),digits=4),sep="")
+  annotation<-paste(annotation,"\n","Correlation is equivalent to shared surface."," Accuracy (Pearson correlation): ",round(as.numeric(modelfit[1]),digits=4),sep="")
 }
 
 if (cor2dist==TRUE){
