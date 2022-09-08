@@ -19,4 +19,5 @@ Depends:
     optimr(>= 2019-12.16),
     reshape2(>= 1.4.4),
     MASS (>= 7.3-53),
-    ggrepel (>= 0.9.1)
+    ggrepel (>= 0.9.1),
+    ggforce (>=0.3.4)
