@@ -27,8 +27,9 @@ fit<-cor2Venn(ids2cormat)
 mode<-c("Verbal Reasoning","Verbal Reasoning","Long-term memory","Long-term memory","Visual short-term memory","Visual short-term memory","Auditory short-term memory","Auditory short-term memory","Processing speed","Processing speed","Visual processing","Visual processing","Abstract reasoning","Abstract reasoning")
 
 p<-cor2Vennplot(fit,manualfill=mode,manualalphafill = 0.2,labelfill=mode)
-
+p
 ggsave(p,file="ids2cor2venn.png")
+
 
 ```
 
@@ -44,10 +45,11 @@ Openpsychometrics.org published a dataset on N=19,719 individuals responding to 
 
 ```R 
 cormat<- cor(big5,use="pairwise.complete.obs")
-fitbig5 <- cor2Venn(cormat,recode=TRUE)
+fitbig5 <- cor2Venn(cormat,Recode=TRUE)
 
 p<-cor2Vennplot(fitbig5,manualalphafill=0.2,fillmode="mclust",density = T)
 p<-p+scale_fill_discrete(labels=c("Extraversion","Neuroticism","Agreeableness","Conscientiousness","Openness"))
+p
 
 ```
 ![Screenshot](big5cor2venn.png)
