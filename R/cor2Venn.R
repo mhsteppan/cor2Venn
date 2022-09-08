@@ -2,7 +2,7 @@
 #' @description This function transforms correlation matrices into venn diagrams. The shared surface area of circles corresponds to the shared variance (R squared) or to another metric (e.g. Pearson / spearman correlation). The algorithm is an approximation based on a quasi-Newton algorithm.
 #' @param cormat A (square) correlation matrix (or other n times n numeric matrix)
 #' @param squared Shared surface areas between circles correspond to the squared correlation matrix (defaults to TRUE)
-#' @param cor2dist Euclidean distances between data points are proportional to correlations (positive correlation = close, negative correlation = distant). Three options are available: cor2dist="1": distances are proportional to correlations; cor2dist="2": distances are equivalent to signed R squared, cor2dist="0": no optimization of distances between nodes (except for surface overlap)
+#' @param cor2dist Euclidean distances between data points are proportional to correlations / signed R squared (high correlation / signed R squared = close, negative correlation / low R squared = distant).
 #' @param fillmode Coloring of circles. There are three options: "Eigen" = according to first eigenvector; "mclust" = according to cluster ananlysis of coordinates; "manual" = manual filling of nodes (use manualfill to provide a vector)
 #' @param Recode Automatically recodes the correlation matrix so that the highest correlation of each variable is always positive (defaults to TRUE)
 #' @keywords Correlation plot, psychometrics
@@ -36,6 +36,7 @@ cor2Venn <- function(cormat, Rsquared = TRUE, Recode = FALSE,maxit=100,threshold
 
 
   c<-completeCormat(cormat)
+  cold<-c
 
   if (Recode == TRUE){
 
@@ -157,8 +158,8 @@ cor2Venn <- function(cormat, Rsquared = TRUE, Recode = FALSE,maxit=100,threshold
   starty<-result$y
 
   }
-  result<-list(optimization, x,y,s,goodness,as.numeric(totaltime),c,exclude,xna,yna,vf)
-  names(result)<-c("optimization","x","y","radius","modelfit","cputime","cormat","exclude","xna","yna","varfit")
+  result<-list(optimization, x,y,s,goodness,as.numeric(totaltime),c,cold,exclude,xna,yna,vf)
+  names(result)<-c("optimization","x","y","radius","modelfit","cputime","cormat","cormat_not_recoded","exclude","xna","yna","varfit")
 
 
 

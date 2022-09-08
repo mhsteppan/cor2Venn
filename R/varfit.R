@@ -1,4 +1,4 @@
-varfit<-function(cor2Vennobj,Rsquared,type="overlap",recode=F){
+varfit<-function(cor2Vennobj,Rsquared,type="overlap"){
 
 
   exclude<-cor2Vennobj$exclude
@@ -9,6 +9,8 @@ varfit<-function(cor2Vennobj,Rsquared,type="overlap",recode=F){
 
 
 
+
+
   ovlong<-melt(overlap)
   elong<-melt(euclid)
 
@@ -16,19 +18,20 @@ varfit<-function(cor2Vennobj,Rsquared,type="overlap",recode=F){
     c<-as.matrix(cor2Vennobj$cormat)
 
 
-  if (recode==TRUE){
-    c<-autorecode(c)
-  }
+
 
   if (Rsquared==T){c<-c^2*(c/abs(c))}
 
+    oldcolnames<-colnames(c)
+  colnames(c)<-rownames(c)
+  u<-colnames(c)
   clong<-melt(c)
 
 
-  u<-colnames(c)
+
 
   result<-data.frame(matrix(NA,nrow=length(u),ncol=2))
-  rownames(result)<-u
+  rownames(result)<-oldcolnames
 
   for (i in 1:length(u)){
     sel<-which(clong[,1]==u[i])
