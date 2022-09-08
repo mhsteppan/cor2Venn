@@ -22,7 +22,7 @@
 #' p<-cor2Vennplot(fit)
 
 
-
+library(ggforce)
 
 #' @export
 
@@ -107,7 +107,7 @@ cor2Vennplot <- function(cor2Vennobject, fillmode="Eigen", PCs=0, annotate=TRUE,
 
   p<-ggplot(data=dd)
 
-
+  #p<-p+geom_point(aes(x=as.numeric(x),y=as.numeric(y),fill=manualfill),alpha=manualalphafill,col="transparent",size=as.numeric(s))
   p<-p+geom_circle(aes(x0=as.numeric(x),y0=as.numeric(y),r=as.numeric(s),fill=manualfill),alpha=manualalphafill,col="transparent")
 
   if (density ==TRUE){
