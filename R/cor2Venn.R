@@ -47,7 +47,7 @@ cor2Venn <- function(cormat, Rsquared = TRUE, Recode = FALSE,maxit=100,threshold
 
   mc <- Mclust(c)
 
-
+  print("Optimizing... Abort pressing ESC")
 
 
  n <-ncol(c)
@@ -91,7 +91,7 @@ cor2Venn <- function(cormat, Rsquared = TRUE, Recode = FALSE,maxit=100,threshold
   startx<-startx[-exclude]
   starty<-starty[-exclude]
 
-  print("Optimizing... Abort pressing ESC")
+
 
   o<-optimr(par=c(startx,starty),method="L-BFGS-B",lower=l[-exclude],upper=u[-exclude],fn=fit,cormat=c[-exclude,-exclude],Rsquared=Rsquared,cor2dist=cor2dist,control = list(fnscale=1,maxit = maxit, trace = 60,
                                                                        REPORT = 50))
