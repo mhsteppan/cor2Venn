@@ -1,3 +1,29 @@
+#' @title Plot a cor2Venn object using ggplot2
+#'
+#' This function transforms correlation matrices into venn diagrams. The shared surface area of circles corresponds to the shared variance (R squared) or to another metric (e.g. Pearson / spearman correlation). The algorithm is an approximation based on a quasi-Newton algorithm.
+#' @param cor2Vennobj A cor2Venn object
+#' @param manualfill A vector to manually change the fill color of variables
+#' @param manualalphafill A vector to manually change the alpha fill of variables, defaults to 0.5
+#' @param fillmode Coloring of circles. There are three options: "Eigen" = according to first eigenvector; "mclust" = according to cluster ananlysis of coordinates; "manual" = manual filling of nodes (use manualfill to provide a vector)
+
+#' @keywords Correlation plot, psychometrics
+#' @return p A ggplot2 object showing the graphical approximation
+#' @usage
+#' cor2venn(cormat, Rsquared = TRUE, cor2dist=c("0","1","2"), Recode = TRUE,
+#' Coloring = c("PC1", "Mclust", "manual"))
+#'
+#' @references
+#' Martin Steppan (2022). corr2venn: Correlation to Venn diagramm. R package version 0.1.0.
+#'
+#' @examples
+#' cormat <- cor(mtcars[,2:13])
+#'
+#' fit <- cor2Venn(cormat)
+#' p<-cor2Vennplot(fit)
+
+
+
+
 #' @export
 
 cor2Vennplot <- function(cor2Vennobject, fillmode="Eigen", PCs=0, annotate=TRUE, showcenter=FALSE,manualcolors = NA, manualfill = NA, manualnodelabels = NA,manualalphafill=0.5,labelalpha=NA,labelfill=NA, avoidoverlap = TRUE,density=FALSE)
