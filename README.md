@@ -45,7 +45,16 @@ Openpsychometrics.org published a dataset on N=19,719 individuals responding to 
 
 ```R 
 cormat<- cor(big5,use="pairwise.complete.obs")
-fitbig5 <- cor2Venn(cormat,Recode=TRUE)
+
+### The fitting of this model is computationally heavy due to the high number of variables. Therefore, a prefitted model is available which can be used as starting values
+
+## fitbig5 <- cor2Venn(cormat,Recode=TRUE)
+## You can save a cor2Venn object and then use the startingvalues ()
+## saveRDS(fitbig5,file="prefittedmodelbig5.RData")
+
+prefittedmodel <- readRDS("prefittedmodelbig5.RData")
+
+fitbig5 <- cor2Venn(cormat,Recode=TRUE,cor2dist=T,startingvalues = prefittedmodel)
 
 p<-cor2Vennplot(fitbig5,manualalphafill=0.2,fillmode="mclust",density = T)
 p<-p+scale_fill_discrete(labels=c("Extraversion","Neuroticism","Agreeableness","Conscientiousness","Openness"))
