@@ -3,9 +3,10 @@
 #' @description This function transforms correlation matrices into venn diagrams. The shared surface area of circles corresponds to the shared variance (R squared) or to another metric (e.g. Pearson / spearman correlation). The algorithm is an approximation based on a quasi-Newton algorithm.
 #' @param cor2Vennobj A cor2Venn object
 #' @param manualfill A vector to manually change the fill color of variables
+#' @param manualcolors A vector to manually change the border color of each variable
 #' @param manualalphafill A vector to manually change the alpha fill of variables, defaults to 0.5
 #' @param fillmode Coloring of circles. There are three options: "Eigen" = according to first eigenvector; "mclust" = according to cluster ananlysis of coordinates; "manual" = manual filling of nodes (use manualfill to provide a vector)
-
+#' @param annotate True or false whether there is an annotation underneath the plot
 #' @keywords Correlation plot, psychometrics
 #' @return p A ggplot2 object showing the graphical approximation
 #' @usage
@@ -172,20 +173,20 @@ cor2Vennplot <- function(cor2Vennobject, fillmode="Eigen", PCs=0, annotate=TRUE,
 annotation<-"Visualization based on R package {cor2Venn}. https://github.com/mhsteppan/cor2Venn"
 
 if (Rsquared=="TRUE"){
-  annotation<-paste(annotation,"\n","Shared variance (R^2) is equivalent to shared surface. Accuracy (Pearson correlation): ",round(as.numeric(modelfit[1]),digits=4),sep="")
+  annotation<-paste(annotation,"\n","Shared variance (R^2) is equivalent to shared surface. SRMR: ",round(as.numeric(modelfit[2]),digits=4),sep="")
 }
 
 if (Rsquared=="FALSE"){
-  annotation<-paste(annotation,"\n","Correlation is equivalent to shared surface."," Accuracy (Pearson correlation): ",round(as.numeric(modelfit[1]),digits=4),sep="")
+  annotation<-paste(annotation,"\n","Correlation is equivalent to shared surface."," SRMR: ",round(as.numeric(modelfit[2]),digits=4),sep="")
 }
 
 if (cor2dist==TRUE){
   if (Rsquared==FALSE){
-  annotation<-paste(annotation,"\n","Euclidean distance between circles is equivalent to correlation. Accuracy (Pearson correlation): ",round(as.numeric(modelfit[2]),digits=4),sep="")
+  annotation<-paste(annotation,"\n","Euclidean distance between circles is equivalent to correlation. r= ",round(as.numeric(modelfit[3]),digits=4),sep="")
   }
 
   if (Rsquared==TRUE){
-    annotation<-paste(annotation,"\n","Euclidean distance between circles is equivalent to signed R squared. Accuracy (Pearson correlation): ",round(as.numeric(modelfit[2]),digits=4),sep="")
+    annotation<-paste(annotation,"\n","Euclidean distance between circles is equivalent to signed R squared. r= ",round(as.numeric(modelfit[3]),digits=4),sep="")
 
   }
 

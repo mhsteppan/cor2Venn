@@ -1,4 +1,4 @@
-fit<-function(x2,cormat,Rsquared=TRUE,cor2dist="0"){
+fit<-function(x2,cormat,Rsquared=TRUE,cor2dist=FALSE){
 
 
 
@@ -48,10 +48,17 @@ fit<-function(x2,cormat,Rsquared=TRUE,cor2dist="0"){
   if (Rsquared==TRUE){
     target<-wr2
     ccc<-cor(cbind(olong[,3],wr2long[,3]),use="pairwise.complete.obs")[1,2]
+
+    rr1<-mean((overlap-cormat^2)^2,na.rm=T)^0.5
+
+
     }
   if (Rsquared==FALSE){
     target<-wr
     ccc<-cor(cbind(olong[,3],wrlong[,3]),use="pairwise.complete.obs")[1,2]
+
+    rr1<-mean((overlap-abs(cormat))^2,na.rm=T)^0.5
+
     }
 
 
@@ -82,14 +89,11 @@ fit<-function(x2,cormat,Rsquared=TRUE,cor2dist="0"){
   dev<-sd(colMeans((overlap-cormat^2)^2,na.rm=T))
   dev2<-sd(colMeans((di-cormat)^2,na.rm=T))
 
-  rr1<-1-sum((overlap-cormat^2)^2,na.rm=T)/length(x)
-  rr1<- 1-sum(overlap-cormat^2,na.rm=T)/(length(x)*length(x)-length(x))
 
-  rr2<-1-sum((overlap-abs(cormat))^2,na.rm=T)/length(x)
-  rr2<- 1-sum(overlap-cormat,na.rm=T)/(length(x)*length(x)-length(x))
 
-  if (rr1>1){rr1<-"negative"}
-  if (rr2>1){rr2<-"negative"}
+
+  phi.SRMR <- 1/(1+exp(8-100*rr1))
+
 
 
   if (Rsquared==T){
@@ -109,7 +113,11 @@ fit<-function(x2,cormat,Rsquared=TRUE,cor2dist="0"){
 
   old<-sum((overlap-target)^2,na.rm=T)/length(x)
 
-  1/cc*1/ccc*old
+
+  out<-paste(cc, " ", ccc,sep="")
+  print(out)
+
+  1/cc*1/ccc*rr1
 
 
 

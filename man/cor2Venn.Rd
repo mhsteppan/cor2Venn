@@ -4,15 +4,18 @@
 \alias{cor2Venn}
 \title{Correlation matrix to Venn diagram}
 \usage{
-cor2Venn(cormat, Rsquared = TRUE, cor2dist=c("0","1","2"), Recode = TRUE,
-Coloring = c("PC1", "Mclust", "manual"))
+cor2Venn(cormat, Rsquared = TRUE, cor2dist=FALSE, Recode = TRUE)
 }
 \arguments{
 \item{cormat}{A (square) correlation matrix (or other n times n numeric matrix)}
 
 \item{Recode}{Automatically recodes the correlation matrix so that the highest correlation of each variable is always positive (defaults to TRUE)}
 
-\item{cor2dist}{Euclidean distances between data points are proportional to correlations (positive correlation = close, negative correlation = distant). Three options are available: cor2dist="1": distances are proportional to correlations; cor2dist="2": distances are equivalent to signed R squared, cor2dist="0": no optimization of distances between nodes (except for surface overlap)}
+\item{maxit}{The maximum number of iterations used by the optimization algorithm (optimr) defaults to 100}
+
+\item{threshold}{Variables with an accuracy (Pearson correlation) of < threshold will be dropped from the model, and a new model is calculated using the rest of the variables (defaults to -1, i.e. no variables are dropped)}
+
+\item{cor2dist}{Euclidean distances between data points are proportional to correlations / signed R squared (high correlation / signed R squared = close, negative correlation / low R squared = distant).}
 
 \item{squared}{Shared surface areas between circles correspond to the squared correlation matrix (defaults to TRUE)}
 
@@ -29,9 +32,9 @@ t CPU time required to find the optimized solution
 This function transforms correlation matrices into venn diagrams. The shared surface area of circles corresponds to the shared variance (R squared) or to another metric (e.g. Pearson / spearman correlation). The algorithm is an approximation based on a quasi-Newton algorithm.
 }
 \examples{
-cormat <- cor(mtcars[,2:13])
+cormat <- ids2cormat
 
-fit <- cor2venn(cormat)
+fit <- cor2Venn(cormat)
 cor2Vennplot(fit)
 }
 \references{

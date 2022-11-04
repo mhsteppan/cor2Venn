@@ -10,6 +10,10 @@ Coloring = c("PC1", "Mclust", "manual"))
 \arguments{
 \item{fillmode}{Coloring of circles. There are three options: "Eigen" = according to first eigenvector; "mclust" = according to cluster ananlysis of coordinates; "manual" = manual filling of nodes (use manualfill to provide a vector)}
 
+\item{annotate}{True or false whether there is an annotation underneath the plot}
+
+\item{manualcolors}{A vector to manually change the border color of each variable}
+
 \item{manualfill}{A vector to manually change the fill color of variables}
 
 \item{manualalphafill}{A vector to manually change the alpha fill of variables, defaults to 0.5}

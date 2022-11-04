@@ -38,7 +38,18 @@ varfit<-function(cor2Vennobj,Rsquared,type="overlap"){
     if (length(sel)>0){
     result[i,1]<-cor(clong[sel,3],ovlong[sel,3],use="pairwise.complete.obs")
     result[i,2]<-cor(clong[sel,3],elong[sel,3],use="pairwise.complete.obs")*-1
-  }}
+    }}
+
+  if (Rsquared==T){
+    colnames(result) <- c("cor(overlap, R2)", "cor(dist, R2)")
+
+  }
+
+  if (Rsquared==F){
+    colnames(result) <- c("cor(overlap, r)", "cor(dist, r)")
+
+  }
+
 
 
 return(result)
