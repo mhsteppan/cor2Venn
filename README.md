@@ -15,16 +15,28 @@ library(cor2Venn)
 ## Examples
 
 
-### Example on the "Dark triad"
+### Example on the "Sexual Compulsivity Scale"
 
-This is an example on 27 items of the Short Dark Triad by Paulhus and Jones (2011). The dataset stems from openpsychometrics.org and consists of 18,192 individuals.
+Openpsychometrics.org provides a dataset on N=3,376 answers to the Sexual Compulsivity Scale from Kalichman and Rompa (1995). 
 
 ```R 
-cormat<-ids2cormat
+c<-cor(dd[,1:10])
+
+
+fitSCS<-cor2Venn(c,cor2dist=F)
+
+lbls<-c("My sexual appetite has gotten\n in the way of my relationships","My sexual thoughts and behaviors\n are causing problems in my life","My desires to have sex \nhave disrupted my daily life","I sometimes fail to meet \nmy commitments and responsibilities \nbecause of my sexual behaviors",
+        "I sometimes get so horny\nI could lose control","I find myself thinking \nabout sex while at work","I feel that sexual thoughts and feelings \nare stronger than I am","I have to struggle to control \nmy sexual thoughts and behavior","I think about sex \nmore than I would like to",
+        "It has been difficult for me \nto find sex partners who desire \nhaving sex as much as I want to.")
+
+
+p<-cor2Vennplot(fitSCS,manualnodelabels = lbls,density = T)
+p<-p+scale_fill_gradient(high="red",low="orange")
+
 ```
 
 
-![Screenshot](darktriad.png)
+![Screenshot](SCS.png)
 
 
 
