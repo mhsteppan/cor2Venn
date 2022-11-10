@@ -42,21 +42,15 @@ p <- p+ ggtitle("Visualizing the 'Dark Triad' using a Cor2Venn plot")
 Openpsychometrics.org published a dataset on N=49,159 individuals responding to Cattell's 16 Personality Factors Questionnaire. 
 
 ```R 
-cormat<- cor(big5,use="pairwise.complete.obs")
 
-### The fitting of this model is computationally heavy due to the high number of variables. Therefore, a prefitted model is available which can be used as starting values
 
-## fitbig5 <- cor2Venn(cormat,Recode=TRUE)
-## You can save a cor2Venn object and then use the startingvalues ()
-## saveRDS(fitbig5,file="prefittedmodelbig5.RData")
+fit <- cor2Venn(cormat16pf,cor2dist = F,autorecode = T)
 
-prefittedmodel <- readRDS("prefittedmodelbig5.RData")
+p <- cor2Vennplot(fit,fillmode="manual",shownetwork = T,networkthreshold = 0.3,avoidoverlap = FALSE)
 
-fitbig5 <- cor2Venn(cormat,Recode=TRUE,cor2dist=T,startingvalues = prefittedmodel)
+p<-p+scale_fill_discrete(labels=c("Extraversion","Receptivity / Openness","Neuroticism / Anxiety","Agreeableness / Accomodation","Self control / Conscientiousness"))
 
-p <- cor2Vennplot(fitbig5,manualalphafill=0.2,fillmode="mclust",density = T)
-p <- p + scale_fill_discrete(labels=c("Extraversion","Neuroticism","Agreeableness","Conscientiousness","Openness"))
-p
+p <- p + ggtitle("Cattell's 16 Personality Factors Test and similiarity with the Big Five")
 
 ```
 ![Screenshot](16pf.png)
