@@ -39,7 +39,9 @@ p <- p+ ggtitle("Visualizing the 'Dark Triad' using a Cor2Venn plot")
 
 ### Example on the 16 PF
 
-Openpsychometrics.org published a dataset on N=49,159 individuals responding to Cattell's 16 Personality Factors Questionnaire. In 
+Openpsychometrics.org published a dataset on N=49,159 individuals responding to Cattell's 16 Personality Factors Questionnaire. 
+The autorecode function automatically inverts variables (*-1), if they are negatively correlated with the closest cluster of variables.
+Using "shownetwork=TRUE" you can visualize the network of the most strongly correlating variables. Correlations < networkthreshold will not be depicted.
 
 ```R 
 
@@ -51,6 +53,8 @@ p <- cor2Vennplot(fit,fillmode="mclust",shownetwork = T,networkthreshold = 0.3,a
 p<-p+scale_fill_discrete(labels=c("Extraversion","Receptivity / Openness","Neuroticism / Anxiety","Agreeableness / Accomodation","Self control / Conscientiousness"))
 
 p <- p + ggtitle("Cattell's 16 Personality Factors Test and similiarity with the Big Five")
+
+p
 
 ```
 ![Screenshot](16pf.png)
