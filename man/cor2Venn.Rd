@@ -9,17 +9,19 @@ cor2Venn(cormat, Rsquared = TRUE, cor2dist=FALSE, Recode = TRUE)
 \arguments{
 \item{cormat}{A (square) correlation matrix (or other n times n numeric matrix)}
 
-\item{Recode}{Automatically recodes the correlation matrix so that the highest correlation of each variable is always positive (defaults to TRUE)}
+\item{cor2dist}{Euclidean distances between data points are proportional to correlations / signed R squared (high correlation / signed R squared = close, negative correlation / low R squared = distant).}
+
+\item{autorecode}{Automatically recodes the correlation matrix so that the highest correlation of each variable is always positive (defaults to FALSE)}
 
 \item{maxit}{The maximum number of iterations used by the optimization algorithm (optimr) defaults to 100}
 
 \item{threshold}{Variables with an accuracy (Pearson correlation) of < threshold will be dropped from the model, and a new model is calculated using the rest of the variables (defaults to -1, i.e. no variables are dropped)}
 
-\item{cor2dist}{Euclidean distances between data points are proportional to correlations / signed R squared (high correlation / signed R squared = close, negative correlation / low R squared = distant).}
-
 \item{squared}{Shared surface areas between circles correspond to the squared correlation matrix (defaults to TRUE)}
 
 \item{fillmode}{Coloring of circles. There are three options: "Eigen" = according to first eigenvector; "mclust" = according to cluster ananlysis of coordinates; "manual" = manual filling of nodes (use manualfill to provide a vector)}
+
+\item{recode}{Vector containing the variables within the correlation matrix that will be inverted (*-1)}
 }
 \value{
 p A ggplot2 object showing the graphical approximation

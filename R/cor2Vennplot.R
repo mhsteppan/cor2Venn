@@ -27,7 +27,7 @@
 
 #' @export
 
-cor2Vennplot <- function(cor2Vennobject, fillmode="Eigen", PCs=0, annotate=TRUE, showcenter=FALSE,manualcolors = NA, manualfill = NA, manualnodelabels = NA,manualalphafill=0.5,labelalpha=NA,labelfill=NA, avoidoverlap = TRUE,density=FALSE)
+cor2Vennplot <- function(cor2Vennobject, fillmode="Eigen", PCs=0, annotate=TRUE, showcenter=FALSE,manualcolors = NA, manualfill = NA, manualnodelabels = NA,manualalphafill=0.5,labelalpha=NA,labelfill=NA, avoidoverlap = TRUE,density=FALSE,shownetwork=FALSE, networkthreshold=0.5)
 {
 
 
@@ -108,6 +108,34 @@ cor2Vennplot <- function(cor2Vennobject, fillmode="Eigen", PCs=0, annotate=TRUE,
 
   p<-ggplot(data=dd)
 
+
+
+
+  if (shownetwork==TRUE){
+
+
+    net<-data.frame(matrix(NA,nrow=length(x)^2,ncol=4))
+
+
+    zz<-0
+    for (i in 1:length(x)){
+      for (j in 1:length(y)){
+
+        if (abs(c[i,j]>networkthreshold)){
+        zz<-zz+1
+        net[zz,1] <- x[i]
+        net[zz,2] <- x[j]
+        net[zz,3] <- y[i]
+        net[zz,4] <- y[j]
+        }
+      }
+    }
+
+    p <- p + annotate("segment",x=as.numeric(net$X1),xend=as.numeric(net$X2),y=as.numeric(net$X3),yend=as.numeric(net$X4))
+
+  }
+
+
   #p<-p+geom_point(aes(x=as.numeric(x),y=as.numeric(y),fill=manualfill),alpha=manualalphafill,col="transparent",size=as.numeric(s))
   p<-p+geom_circle(aes(x0=as.numeric(x),y0=as.numeric(y),r=as.numeric(s),fill=manualfill),alpha=manualalphafill,col="transparent")
 
@@ -173,7 +201,7 @@ cor2Vennplot <- function(cor2Vennobject, fillmode="Eigen", PCs=0, annotate=TRUE,
 annotation<-"Visualization based on R package {cor2Venn}. https://github.com/mhsteppan/cor2Venn"
 
 if (Rsquared=="TRUE"){
-  annotation<-paste(annotation,"\n","Shared variance (R^2) is equivalent to shared surface. SRMR: ",round(as.numeric(modelfit[2]),digits=4),sep="")
+  annotation<-paste(annotation,"\n","Shared variance (R^2) is equivalent to shared surface. SRMR: ",round(as.numeric(modelfit[2]),digits=4),sep="", "; r=",round(as.numeric(modelfit[1]),digits=4))
 }
 
 if (Rsquared=="FALSE"){
@@ -203,10 +231,17 @@ if (annotate==TRUE){
   p<-p+ggtitle("Correlation to Venn Plot")
 
 
-  if (fillmode=="Eigen"){p<-p+labs(fill="First Eigenvector")}
+  if (fillmode=="Eigen"){
+    p<-p+labs(fill="First Eigenvector")
+              p<-p+scale_fill_gradient(high="red",low="yellow")
+              }
   if (fillmode=="mclust"){p<-p+labs(fill="Cluster")}
 
   if (fillmode=="manual"){p<-p+labs(fill="Manual fill")}
+
+
+
+
 
 
 
