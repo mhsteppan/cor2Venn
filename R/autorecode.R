@@ -15,11 +15,6 @@
 #' cormat2 <- autorecode(cormat)
 
 
-library(optimr)
-library(mclust)
-
-
-
 
 autorecode <- function(c){
 
@@ -70,4 +65,5 @@ autorecode <- function(c){
 
 
 }
+
 

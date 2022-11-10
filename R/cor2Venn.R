@@ -4,29 +4,31 @@
 #' @param squared Shared surface areas between circles correspond to the squared correlation matrix (defaults to TRUE)
 #' @param cor2dist Euclidean distances between data points are proportional to correlations / signed R squared (high correlation / signed R squared = close, negative correlation / low R squared = distant).
 #' @param fillmode Coloring of circles. There are three options: "Eigen" = according to first eigenvector; "mclust" = according to cluster ananlysis of coordinates; "manual" = manual filling of nodes (use manualfill to provide a vector)
-#' @param Recode Automatically recodes the correlation matrix so that the highest correlation of each variable is always positive (defaults to TRUE)
+#' @param threshold Variables with an accuracy (Pearson correlation) of < threshold will be dropped from the model, and a new model is calculated using the rest of the variables (defaults to -1, i.e. no variables are dropped)
+#' @param autorecode Automatically recodes the correlation matrix so that the highest correlation of each variable is always positive (defaults to FALSE)
+#' @param recode Vector containing the variables within the correlation matrix that will be inverted (*-1)
+#' @param maxit The maximum number of iterations used by the optimization algorithm (optimr) defaults to 100
 #' @keywords Correlation plot, psychometrics
 #' @return p A ggplot2 object showing the graphical approximation
 #' @return xyr A three-column matrix providing x and y coordinates for all variables in the plot and the radius as depicted in the ggplot2 object
 #' @return t CPU time required to find the optimized solution
 #' @usage
-#' cor2Venn(cormat, Rsquared = TRUE, cor2dist=c("0","1","2"), Recode = TRUE,
-#' Coloring = c("PC1", "Mclust", "manual"))
+#' cor2Venn(cormat, Rsquared = TRUE, cor2dist=FALSE, Recode = TRUE)
 #'
 #' @references
 #' Martin Steppan (2022). corr2venn: Correlation to Venn diagramm. R package version 0.1.0.
 #'
 #' @examples
-#' cormat <- cor(mtcars[,2:13])
+#' cormat <- ids2cormat
 #'
-#' fit <- cor2venn(cormat)
+#' fit <- cor2Venn(cormat)
 #' cor2Vennplot(fit)
 
 
 
 #' @export
 
-cor2Venn <- function(cormat, Rsquared = TRUE, Recode = FALSE,maxit=100,threshold=-1,cor2dist=FALSE,startingvalues=list())
+cor2Venn <- function(cormat, Rsquared=TRUE, cor2dist=TRUE, autorecode = FALSE,maxit=100,threshold=-1,startingvalues=list())
 {
 
 
@@ -38,7 +40,10 @@ cor2Venn <- function(cormat, Rsquared = TRUE, Recode = FALSE,maxit=100,threshold
   c<-completeCormat(cormat)
   cold<-c
 
-  if (Recode == TRUE){
+
+
+
+  if (autorecode == TRUE){
 
     c<-autorecode(c)
 
@@ -56,8 +61,13 @@ cor2Venn <- function(cormat, Rsquared = TRUE, Recode = FALSE,maxit=100,threshold
 
 
   if (length(startingvalues)==0){
+
+
     startx<-e$vectors[,1]
     starty<-e$vectors[,2]
+
+    #startx<-rnorm(n,0,1)
+    #starty<-rnorm(n,0,1)
   }
 
 
@@ -93,15 +103,14 @@ cor2Venn <- function(cormat, Rsquared = TRUE, Recode = FALSE,maxit=100,threshold
   starty<-starty[-exclude]
 
 
+### THIS IS THE FUNCTION THAT DOES THE MINIMIZATION: CALL FOR COLLABORATION TO INCREASE THE SPEED OF THIS MINIMIZATION
 
-  o<-optimr(par=c(startx,starty),method="L-BFGS-B",lower=l[-exclude],upper=u[-exclude],fn=fit,cormat=c[-exclude,-exclude],Rsquared=Rsquared,cor2dist=cor2dist,control = list(fnscale=1,maxit = maxit, trace = 60,
-                                                                       REPORT = 50))
+   o<-optimr(par=c(startx,starty),method="L-BFGS-B",lower=l[-exclude],upper=u[-exclude],fn=fit,cormat=c[-exclude,-exclude],Rsq=Rsquared,cor2d=cor2dist,control = list(fnscale=1,maxit = maxit, trace = 60, REPORT = 50))
   }
 
   if (length(exclude)==0){
 
-    o<-optimr(par=c(startx,starty),method="L-BFGS-B",lower=l,upper=u,fn=fit,cormat=c,Rsquared=Rsquared,cor2dist=cor2dist,control = list(fnscale=1,maxit = maxit, trace = 60,
-                                                                                                                                                                               REPORT = 50))
+    o<-optimr(par=c(startx,starty),method="L-BFGS-B",lower=l,upper=u,fn=fit,cormat=c,Rsq=Rsquared,cor2d=cor2dist,control = list(fnscale=1,maxit = maxit, trace = 60, REPORT = 50))
   }
 
 
