@@ -39,14 +39,14 @@ p <- p+ ggtitle("Visualizing the 'Dark Triad' using a Cor2Venn plot")
 
 ### Example on the 16 PF
 
-Openpsychometrics.org published a dataset on N=49,159 individuals responding to Cattell's 16 Personality Factors Questionnaire. 
+Openpsychometrics.org published a dataset on N=49,159 individuals responding to Cattell's 16 Personality Factors Questionnaire. In 
 
 ```R 
 
 
 fit <- cor2Venn(cormat16pf,cor2dist = F,autorecode = T)
 
-p <- cor2Vennplot(fit,fillmode="manual",shownetwork = T,networkthreshold = 0.3,avoidoverlap = FALSE)
+p <- cor2Vennplot(fit,fillmode="mclust",shownetwork = T,networkthreshold = 0.3,avoidoverlap = FALSE)
 
 p<-p+scale_fill_discrete(labels=c("Extraversion","Receptivity / Openness","Neuroticism / Anxiety","Agreeableness / Accomodation","Self control / Conscientiousness"))
 
