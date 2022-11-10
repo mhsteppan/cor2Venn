@@ -17,7 +17,7 @@ library(cor2Venn)
 
 ### Example on the "Sexual Compulsivity Scale"
 
-Openpsychometrics.org provides a dataset on N=18,192 answers to the Short Dark Triad by Paulhus and Jones (2011). 
+Openpsychometrics.org provides a dataset on N=18,192 answers to the Short Dark Triad by Paulhus and Jones (2011). With only three variables the a two-dimensional visualization usually has no loss of information.
 
 ```R 
 cormat <- darktriad
@@ -25,8 +25,8 @@ cormat <- darktriad
 fit <- cor2Venn(cormat)
 
 p <- cor2Vennplot(fit,manualnodelabels = c("Machiavellianism","Narcissism","Psychopathy"),fillmode="Eigen",density=F,avoidoverlap = F,shownetwork = T)
-p<-p+scale_fill_gradient(high="red",low="yellow")
-p<-p+ggtitle("Visualizing the 'Dark Triad' using a Cor2Venn plot")
+p <- p + scale_fill_gradient(high="red",low="yellow")
+p <- p+ ggtitle("Visualizing the 'Dark Triad' using a Cor2Venn plot")
 
 ```
 
@@ -54,8 +54,8 @@ prefittedmodel <- readRDS("prefittedmodelbig5.RData")
 
 fitbig5 <- cor2Venn(cormat,Recode=TRUE,cor2dist=T,startingvalues = prefittedmodel)
 
-p<-cor2Vennplot(fitbig5,manualalphafill=0.2,fillmode="mclust",density = T)
-p<-p+scale_fill_discrete(labels=c("Extraversion","Neuroticism","Agreeableness","Conscientiousness","Openness"))
+p <- cor2Vennplot(fitbig5,manualalphafill=0.2,fillmode="mclust",density = T)
+p <- p + scale_fill_discrete(labels=c("Extraversion","Neuroticism","Agreeableness","Conscientiousness","Openness"))
 p
 
 ```
@@ -82,8 +82,8 @@ prefittedmodel <- readRDS("prefittedmodelbig5.RData")
 
 fitbig5 <- cor2Venn(cormat,Recode=TRUE,cor2dist=T,startingvalues = prefittedmodel)
 
-p<-cor2Vennplot(fitbig5,manualalphafill=0.2,fillmode="mclust",density = T)
-p<-p+scale_fill_discrete(labels=c("Extraversion","Neuroticism","Agreeableness","Conscientiousness","Openness"))
+p <- cor2Vennplot(fitbig5,manualalphafill=0.2,fillmode="mclust",density = T)
+p <- p + scale_fill_discrete(labels=c("Extraversion","Neuroticism","Agreeableness","Conscientiousness","Openness"))
 p
 
 ```
@@ -95,10 +95,10 @@ p
 Abdellaoui et al. published genetic correlations across psychiatric disorders including substance use disorders. Genetic correlations represent the proportion of variance that two traits share due to genetic causes. Therefore, for visualization purposes we use squared = FALSE. 
 
 ```R 
-cormat<- abdellaouietal
+cormat <- abdellaouietal
 fitrg <- cor2Venn(cormat, Rsquared=F,cor2dist=T)
-p<-cor2Vennplot(fitrg,manualalphafill=0.2,density=T)
-p<-p+scale_fill_gradient(high="red",low="yellow")
+p <- cor2Vennplot(fitrg,manualalphafill=0.2,density=T)
+p <- p + scale_fill_gradient(high="red",low="yellow")
 p
 ggsave(p,file="abdellaouicor2venn.png")
 
@@ -113,13 +113,13 @@ Source: Abdellaoui, A., Smit, D. J., van den Brink, W., Denys, D., & Verweij, K.
 This is an example on 14 subtests of the intelligence and development test (IDS-2). The visualization shows a 'positive manifold', i.e. that all subtests share variance with each other. Some subtests (e.g. reasoning) are more central than others (e.g. memory).  
 
 ```R 
-cormat<-ids2cormat
-fit<-cor2Venn(ids2cormat)
+cormat <- ids2cormat
+fit <- cor2Venn(ids2cormat)
 
 
-mode<-c("Verbal Reasoning","Verbal Reasoning","Long-term memory","Long-term memory","Visual short-term memory","Visual short-term memory","Auditory short-term memory","Auditory short-term memory","Processing speed","Processing speed","Visual processing","Visual processing","Abstract reasoning","Abstract reasoning")
+mode <- c("Verbal Reasoning","Verbal Reasoning","Long-term memory","Long-term memory","Visual short-term memory","Visual short-term memory","Auditory short-term memory","Auditory short-term memory","Processing speed","Processing speed","Visual processing","Visual processing","Abstract reasoning","Abstract reasoning")
 
-p<-cor2Vennplot(fit,manualfill=mode,manualalphafill = 0.2,labelfill=mode)
+p <- cor2Vennplot(fit,manualfill=mode,manualalphafill = 0.2,labelfill=mode)
 p
 ggsave(p,file="ids2cor2venn.png")
 
