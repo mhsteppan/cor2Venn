@@ -59,7 +59,7 @@ p<-p+scale_fill_discrete(labels=c("Extraversion","Neuroticism","Agreeableness","
 p
 
 ```
-![Screenshot](16PF.png)
+![Screenshot](16pf.png)
 
 
 
