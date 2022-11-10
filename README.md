@@ -15,7 +15,7 @@ library(cor2Venn)
 ## Examples
 
 
-### Example on the "Sexual Compulsivity Scale"
+### Example on the "Dark Triad"
 
 Openpsychometrics.org provides a dataset on N=18,192 answers to the Short Dark Triad by Paulhus and Jones (2011). With only three variables the a two-dimensional visualization usually has no loss of information.
 
