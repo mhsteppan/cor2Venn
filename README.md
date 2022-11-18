@@ -87,7 +87,7 @@ p <- p + scale_fill_discrete(labels=c("Extraversion","Neuroticism","Agreeablenes
 p
 
 ```
-![Screenshot](big5cor2venn.png)
+![Screenshot](big5model.png)
 
 
 ### Example on genetic correlations across psychiatric disorders - the p' factor 
