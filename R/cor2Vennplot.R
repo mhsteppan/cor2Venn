@@ -85,11 +85,11 @@ cor2Vennplot <- function(cor2Vennobject, fillmode="Eigen", PCs=0, annotate=TRUE,
 
 
 
-  if (is.na(manualnodelabels)==TRUE){
+  if (is.na(manualnodelabels[1])==TRUE){
     lbls<-colnames(c)
   }
 
-  if (is.na(manualnodelabels)==FALSE){
+  if (is.na(manualnodelabels[1])==FALSE){
     lbls<-manualnodelabels
   }
 
