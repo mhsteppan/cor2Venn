@@ -74,9 +74,11 @@ cormat<- cor(big5,use="pairwise.complete.obs")
 
 ## fitbig5 <- cor2Venn(cormat,autorecode=TRUE)
 ## You can save a cor2Venn object and then use the startingvalues ()
-## saveRDS(fitbig5,file="prefittedmodelbig5.RData")
+## prefittedmodel <- fitbig5
 
-prefittedmodel <- readRDS("prefittedmodelbig5.RData")
+## One prefitted model is attached with the package
+
+data(prefittedmodel)
 
 fitbig5 <- cor2Venn(cormat,autorecode=TRUE,cor2dist=T,startingvalues = prefittedmodel)
 
