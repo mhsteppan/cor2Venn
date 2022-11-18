@@ -1,4 +1,3 @@
-library(pracma)
 
 inters<-function(x1,y1,r1,x2,y2,r2){
   d = hypot(x2 - x1,y2 - y1)
