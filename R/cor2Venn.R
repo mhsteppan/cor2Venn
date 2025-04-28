@@ -2,7 +2,7 @@
 #' @description This function transforms correlation matrices into Venn diagrams. The shared surface area of circles corresponds to the shared variance (R squared) or to another metric (e.g. Pearson / Spearman correlation). The algorithm is an approximation based on a quasi-Newton algorithm.
 #' @param cormat A (square) correlation matrix (or other n times n numeric matrix)
 #' @param squared Shared surface areas between circles correspond to the squared correlation matrix (defaults to TRUE)
-#' @param cor2dist Euclidean distances between data points are proportional to correlations / signed R squared (high correlation = close, low/negative correlation = distant).
+#' @param cor2dist Euclidean distances between data points are proportional to correlations / signed R squared.
 #' @param fillmode Coloring of circles ("Eigen", "mclust", "manual")
 #' @param threshold Drop variables with a fit below threshold (default -1 = none dropped)
 #' @param autorecode Automatically recodes the correlation matrix (defaults to FALSE)
@@ -56,7 +56,7 @@ cor2Venn <- function(cormat, Rsquared=TRUE, cor2dist=TRUE, autorecode=FALSE, max
       c_use <- c
     }
 
-    # Key point: wrap 'fit' function!
+    # Wrapped optim call
     o <- optim(
       par = c(startx, starty),
       fn = function(par) fit(par, cormat = c_use, Rsq = Rsquared, cor2d = cor2dist),
@@ -66,10 +66,12 @@ cor2Venn <- function(cormat, Rsquared=TRUE, cor2dist=TRUE, autorecode=FALSE, max
       control = list(fnscale = 1, maxit = maxit, trace = 3, REPORT = 1)
     )
 
+    # Extract coordinates
     x <- o$par[1:length(startx)]
     y <- o$par[(length(startx) + 1):(length(startx) * 2)]
-    s <- rep(1, length(startx))  # radius is fixed here
+    s <- rep(1, length(startx))  # radius fixed
 
+    # Create full vector with NAs for dropped variables
     se <- seq(1, n, 1)
     fill <- setdiff(se, exclude)
     xna <- rep(NA, n)
@@ -85,13 +87,13 @@ cor2Venn <- function(cormat, Rsquared=TRUE, cor2dist=TRUE, autorecode=FALSE, max
       totaltime <- totaltime + startingvalues$cputime
     }
 
-    optimization <- matrix(c(Rsquared, cor2dist), ncol=2)
+    optimization <- matrix(c(Rsquared, cor2dist), ncol = 2)
     colnames(optimization) <- c("Rsquared", "cor2dist")
 
-    result <- list(x, y, s, NA, as.numeric(totaltime), c, exclude, xna, yna)
-    names(result) <- c("x", "y", "radius", "modelfit", "cputime", "cormat", "exclude", "xna", "yna")
+    result <- list(optimization, x, y, s, NA, as.numeric(totaltime), c, exclude, xna, yna)
+    names(result) <- c("optimization", "x", "y", "radius", "modelfit", "cputime", "cormat", "exclude", "xna", "yna")
 
-    goodness <- ov(result, Rsquared=Rsquared)
+    goodness <- ov(result, Rsquared = Rsquared)
 
     result <- list(optimization, x, y, s, goodness, as.numeric(totaltime), c, exclude, xna, yna)
     names(result) <- c("optimization", "x", "y", "radius", "modelfit", "cputime", "cormat", "exclude", "xna", "yna")
@@ -105,10 +107,12 @@ cor2Venn <- function(cormat, Rsquared=TRUE, cor2dist=TRUE, autorecode=FALSE, max
 
     exclude <- c(exclude, mi)
 
-    startx <- result$x
-    starty <- result$y
+    # ⛔ Corrected here: no result$x anymore!
+    startx <- x
+    starty <- y
   }
 
+  # Final result
   result <- list(optimization, x, y, s, goodness, as.numeric(totaltime), c, cold, exclude, xna, yna, vf)
   names(result) <- c("optimization", "x", "y", "radius", "modelfit", "cputime", "cormat", "cormat_not_recoded", "exclude", "xna", "yna", "varfit")
 
