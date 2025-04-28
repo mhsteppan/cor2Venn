@@ -16,7 +16,6 @@ Depends:
     ggplot2 (>= 3.3.6),
     pracma (>= 2.3.8),
     mclust (>= 5.4.9),
-    optimr(>= 2019-12.16),
     reshape2(>= 1.4.4),
     MASS (>= 7.3-53),
     ggrepel (>= 0.9.1),
